@@ -1,0 +1,64 @@
+.news-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 700px;
+}
+
+.news-container-title {
+    font-size: 1.5em;
+}
+
+.news-refresh-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.news-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-list-item {
+    flex-direction: row;
+    box-shadow: 1px -1px 5px black;
+    margin: 5px 0;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.message-subject {
+    font-size: 1em;
+}
+
+.message-date {
+    font-size: 0.8em;
+    color: lightgray;
+    margin-left: 10px;
+}
+
+.message-info {
+    display: flex;
+    padding: 10px;
+}
+
+.message-body {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.message-img {
+    min-width: 50px;
+    max-width: 200px;
+    min-height: 50px;
+    max-height: 200px;
+    margin-right: 10px;
+}
+
+.message-pending {
+    background-color: gray;
+}

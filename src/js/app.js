@@ -1,5 +1,9 @@
-import '../components/Polling/Polling.css';
-import Polling from '../components/Polling/Polling';
+import '../components/News/NewsUI.css';
+import NewsUI from '../components/News/NewsUI';
+import NewsPollingService from '../components/News/NewsPollingService';
 
-const pollingContainer = document.querySelector('.polling-container');
-const polling = new Polling(process.env.SERVER_URL || 'https://unker-ahj-homeworks-rxjs-server.onrender.com', pollingContainer);
+
+const newsContainer = document.querySelector('.container');
+const pollingService = new NewsPollingService(process.env.SERVER_URL
+    || 'https://unker-ahj-homeworks-workers-server.onrender.com');
+const newsUI = new NewsUI(newsContainer, 'Новости мира кино', pollingService);
