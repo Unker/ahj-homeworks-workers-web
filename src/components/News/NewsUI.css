@@ -21,6 +21,8 @@
 .news-list {
     display: flex;
     flex-direction: column;
+    max-height: 500px;
+    overflow: overlay;
 }
 
 .news-list-item {
@@ -31,7 +33,12 @@
     padding: 5px;
 }
 
+.message-head {
+    display: flex;
+}
+
 .message-subject {
+    width:100%;
     font-size: 1em;
 }
 
@@ -39,11 +46,12 @@
     font-size: 0.8em;
     color: lightgray;
     margin-left: 10px;
+    flex: 0 0 auto;
 }
 
 .message-info {
     display: flex;
-    padding: 10px;
+    padding: 5px;
 }
 
 .message-body {
@@ -53,12 +61,35 @@
 
 .message-img {
     min-width: 50px;
-    max-width: 200px;
+    max-width: 50px;
     min-height: 50px;
-    max-height: 200px;
+    max-height: 50px;
     margin-right: 10px;
 }
 
 .message-pending {
     background-color: gray;
+}
+
+.error-connection-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.error-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+    overflow: auto;
 }

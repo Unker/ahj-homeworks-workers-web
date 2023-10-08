@@ -3,25 +3,28 @@ export default class NewsUI {
     this.container = container;
     this.pollingService = pollingService;
 
-    const containerNews = document.createElement('div');
-    containerNews.classList.add('news-container');
-    containerNews.innerHTML = `
+    this.containerNews = document.createElement('div');
+    this.containerNews.classList.add('news-container');
+    this.containerNews.innerHTML = `
       <div class="news-container-title">${title}</div>
       <a class="news-refresh-btn">Обновить</a>
       <div class="news-list"></div>
     `;
 
-    this.newsList = containerNews.querySelector('.news-list');
-    this.container.appendChild(containerNews);
+    this.newsList = this.containerNews.querySelector('.news-list');
+    this.container.appendChild(this.containerNews);
 
     this.pollingService.startPolling().subscribe((newMessages) => {
-      // debugger;
       newMessages.forEach((newMessage) => {
         this.pollingService.newsList[newMessage.id] = newMessage;
       });
-
+      
       this.updateUI();
-    });
+    },
+    (error) => {
+        this.showModalNoConnection();
+      }
+    );
   }
 
   updateUI() {
@@ -42,7 +45,7 @@ export default class NewsUI {
       const listItem = document.createElement('div');
       listItem.classList.add('news-list-item');
       listItem.innerHTML = `
-        <div class="message-title">
+        <div class="message-head">
           <span class="message-subject">${shortSubject}</span>
           <span class="message-date">${formattedDate}</span>
         </div>
@@ -55,5 +58,17 @@ export default class NewsUI {
       // this.newsList.appendChild(listItem);
       this.newsList.insertBefore(listItem, this.newsList.firstChild);
     });
+  }
+
+  showModalNoConnection() {
+    const errorModal = document.createElement('div');
+    errorModal.classList.add('error-connection-modal');
+    errorModal.innerHTML = `
+      <div class="error-modal-content">
+        <span>Не удалось загрузить данные. Пожалуйста, проверьте подключение к сети и обновите страницу.</span>
+      </div>
+    `;
+
+    this.containerNews.appendChild(errorModal);
   }
 }

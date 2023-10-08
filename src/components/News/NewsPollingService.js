@@ -1,18 +1,20 @@
 import { ajax } from 'rxjs/ajax';
-import { interval, from } from 'rxjs';
+import { interval, throwError, from } from 'rxjs';
 import {
-  switchMap, catchError, map, startWith,
+  switchMap, catchError, map, startWith, timeout
 } from 'rxjs/operators';
 
 export default class NewsPollingService {
-  constructor(url) {
+  constructor(url, pollingInterval = 6000, timeout = 10000) {
     this.url = url;
     this.newsList = {};
+    this.pollingInterval = pollingInterval;
+    this.timeout = timeout;
   }
 
   startPolling() {
     // Создаем поток обновлений
-    return interval(10000).pipe(
+    return interval(this.pollingInterval).pipe(
       startWith(0),
       switchMap(() => ajax.getJSON(`${this.url}/news`).pipe(
         catchError((error) => {
@@ -21,6 +23,12 @@ export default class NewsPollingService {
         }),
       )),
       map((response) => response.newsList.reverse()),
+      timeout(this.timeout),
+    ).pipe(
+      catchError((error) => {
+        console.error('Ошибка при запросе:', error);
+        return throwError(error); // Генерируем исключение при ошибке
+      })
     );
   }
 }
