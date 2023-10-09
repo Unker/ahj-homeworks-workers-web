@@ -14,50 +14,79 @@ export default class NewsUI {
     this.newsList = this.containerNews.querySelector('.news-list');
     this.container.appendChild(this.containerNews);
 
+    this.updateUI();
+
     this.pollingService.startPolling().subscribe((newMessages) => {
       newMessages.forEach((newMessage) => {
         this.pollingService.newsList[newMessage.id] = newMessage;
       });
-      
+
       this.updateUI();
     },
-    (error) => {
+      (error) => {
         this.showModalNoConnection();
       }
     );
   }
 
+  removeElementsByClass(className) {
+    const elements = document.getElementsByClassName(className);
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  }
+
   updateUI() {
     this.newsList.innerHTML = '';
+    this.removeElementsByClass('news-list-item');
     const sortedMessages = Object.values(this.pollingService.newsList).sort(
-      (a, b) => b.received - a.received,
+      (a, b) => a.posted - b.posted,
     );
 
-    sortedMessages.forEach((message) => {
-      const formattedDate = new Date(message.posted * 1000).toLocaleString();
-      const shortSubject = message.subject.length > 30
-        ? `${message.subject.substring(0, 30)}...`
-        : message.subject;
-      const shortBody = message.body.length > 150
-        ? `${message.body.substring(0, 150)}...`
-        : message.body;
-
-      const listItem = document.createElement('div');
-      listItem.classList.add('news-list-item');
-      listItem.innerHTML = `
-        <div class="message-head">
-          <span class="message-subject">${shortSubject}</span>
-          <span class="message-date">${formattedDate}</span>
+    let n = Object.keys(sortedMessages).length;
+    n = 0;
+    if (n === 0) {
+      // отрисуем заглушку
+      const placeholder = document.createElement('div');
+      placeholder.classList.add('news-placeholder');
+      placeholder.innerHTML = `
+        <div class="placeholder-bar">
+          <div class="animation-bar"></div>
         </div>
-        <div class="message-info">
-          <img class="message-img"></img>
-          <span class="message-body">${shortBody}</span>
+        <div class="placeholder-bar">
+          <div class="animation-bar"></div>
         </div>
-        `;
-
-      // this.newsList.appendChild(listItem);
-      this.newsList.insertBefore(listItem, this.newsList.firstChild);
-    });
+        <div class="placeholder-bar">
+          <div class="animation-bar"></div>
+        </div>
+      `;
+      this.newsList.appendChild(placeholder);
+    } else {
+      sortedMessages.slice(n - 5, n).forEach((message) => {
+        const formattedDate = new Date(message.posted * 1000).toLocaleString();
+        const shortSubject = message.subject.length > 30
+          ? `${message.subject.substring(0, 30)}...`
+          : message.subject;
+        const shortBody = message.body.length > 150
+          ? `${message.body.substring(0, 150)}...`
+          : message.body;
+  
+        const listItem = document.createElement('div');
+        listItem.classList.add('news-list-item');
+        listItem.innerHTML = `
+          <div class="message-head">
+            <span class="message-subject">${shortSubject}</span>
+            <span class="message-date">${formattedDate}</span>
+          </div>
+          <div class="message-info">
+            <img class="message-img"></img>
+            <span class="message-body">${shortBody}</span>
+          </div>
+          `;
+  
+        this.newsList.insertBefore(listItem, this.newsList.firstChild);
+      });
+    }
   }
 
   showModalNoConnection() {
