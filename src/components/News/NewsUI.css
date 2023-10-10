@@ -38,6 +38,7 @@
 }
 
 .message-subject {
+  min-width: 50%;
   width: 100%;
   font-size: 1em;
 }
@@ -92,42 +93,4 @@
   text-align: center;
   width: 300px;
   overflow: auto;
-}
-
-.news-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  height: 300px;
-  overflow: hidden;
-}
-
-.placeholder-bar {
-  background-color: lightgrey;
-  height: 20px;
-  margin-bottom: 10px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.animation-bar {
-  background-color: #f0f0f0; 
-  height: 20px;
-  width: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(50%) rotate(-45deg);
-  animation: loadingAnimation 3.0s infinite linear;
-}
-
-@keyframes loadingAnimation {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
 }

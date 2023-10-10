@@ -49,11 +49,11 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-    new InjectManifest({
-      swSrc: './src/components/News/service.worker.js',
-      swDest: 'service-worker.js',
-      include: [/\.html$/, /\.css$/, /^\.\/$/], // Паттерны для кэширования
-    }),
+    // new InjectManifest({
+    //   swSrc: './src/components/News/service.worker.js',
+    //   swDest: 'service-worker.js',
+    //   include: [/\.html$/, /\.css$/, /^\.\/$/], // Паттерны для кэширования
+    // }),
     new webpack.DefinePlugin({
       "process.env": JSON.stringify(process.env),
     }),
