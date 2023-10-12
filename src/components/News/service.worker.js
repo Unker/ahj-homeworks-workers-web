@@ -11,7 +11,9 @@ self.addEventListener('install', (event) => {
         cache.addAll([
           './',
           './index.html',
-          './components/News/NewsUI.css',
+          './css/style.css',
+          './css/placeholderNews.css',
+          './js/placeholderNews.js',
         ])
       })
   )

@@ -5,7 +5,7 @@ import {
 } from 'rxjs/operators';
 
 export default class NewsPollingService {
-  constructor(url, pollingInterval = 60000, timeout = 100000) {
+  constructor(url, pollingInterval = 6000, timeout = 10000) {
     this.url = url;
     this.newsList = {};
     this.pollingInterval = pollingInterval;

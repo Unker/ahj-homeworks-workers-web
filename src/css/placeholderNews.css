@@ -1,16 +1,8 @@
-.news-list-item-placeholder {
-    flex-direction: row;
-    box-shadow: 1px -1px 5px black;
-    margin: 5px 0;
-    border: 1px solid black;
-    padding: 5px;
-}
-
 .news-placeholder {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 300px;
+    min-height: 300px;
     width: 100%;
     overflow: hidden;
 }
@@ -63,4 +55,8 @@
     100% {
         left: 100%;
     }
+}
+
+.news-placeholder-item {
+    margin-top: 10px;
 }
