@@ -1,5 +1,5 @@
 import '../components/News/NewsUI.css';
-import '../css/placeholderNews.css'
+import '../css/placeholderNews.css';
 import NewsUI from '../components/News/NewsUI';
 import NewsPollingService from '../components/News/NewsPollingService';
 import PlaceholderNews from './placeholderNews';

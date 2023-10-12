@@ -22,10 +22,11 @@
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
+    "@dropbox/eslint-plugin-service-worker": "^1.0.0",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "eslint": "^8.27.0",
+    "eslint": "^8.51.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.27.5",
@@ -44,6 +45,8 @@
     "workbox-webpack-plugin": "^7.0.0"
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "rxjs": "^7.8.1",
+    "workbox-precaching": "^7.0.0"
   }
 }

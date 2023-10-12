@@ -14,25 +14,22 @@ export default class NewsUI {
     this.newsList = this.containerNews.querySelector('.news-list');
     this.container.appendChild(this.containerNews);
 
-    this.pollingService.startPolling().subscribe((newMessages) => {
-      newMessages.forEach((newMessage) => {
-        this.pollingService.newsList[newMessage.id] = newMessage;
-      });
+    this.pollingService.startPolling().subscribe(
+      (newMessages) => {
+        newMessages.forEach((newMessage) => {
+          this.pollingService.newsList[newMessage.id] = newMessage;
+        });
 
-      this.updateUI();
-    },
+        this.updateUI();
+      },
       (error) => {
         this.showModalNoConnection();
-      }
+      },
     );
   }
 
-  onInitialized(callback) {
-    callback();
-  }
-
   removeElementsByClass(className) {
-    const elements = document.getElementsByClassName(className);
+    const elements = this.containerNews.getElementsByClassName(className);
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0]);
     }
@@ -45,7 +42,7 @@ export default class NewsUI {
       (a, b) => a.posted - b.posted,
     );
 
-    let n = Object.keys(sortedMessages).length;
+    const n = Object.keys(sortedMessages).length;
     sortedMessages.slice(n - 5, n).forEach((message) => {
       const formattedDate = new Date(message.posted * 1000).toLocaleString();
       const shortSubject = message.subject.length > 30

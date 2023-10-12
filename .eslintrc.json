@@ -1,10 +1,14 @@
 {
-  "plugins": ["prettier"],
+  "plugins": [
+    "prettier",
+    "@dropbox/service-worker"
+  ],
   "extends": ["airbnb-base"],
   "env": {
     "es6": true,
     "browser": true,
-    "jest": true
+    "jest": true,
+    "serviceworker": true
   },
   "parserOptions": {
     "sourceType": "module",
@@ -21,7 +25,9 @@
     ],
     "no-unused-vars": [
         "off"
-    ]
+    ],
+    "@dropbox/service-worker/no-deprecated-extension-api": "error",
+    "@dropbox/service-worker/no-dynamic-import": "error"
   },
   "overrides": [
     {

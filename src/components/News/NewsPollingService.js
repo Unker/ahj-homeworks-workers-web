@@ -1,15 +1,15 @@
 import { ajax } from 'rxjs/ajax';
 import { interval, throwError, from } from 'rxjs';
 import {
-  switchMap, catchError, map, startWith, timeout
+  switchMap, catchError, map, startWith, timeout,
 } from 'rxjs/operators';
 
 export default class NewsPollingService {
-  constructor(url, pollingInterval = 6000, timeout = 10000) {
+  constructor(url, pollingInterval = 7000, timeoutPolling = 10000) {
     this.url = url;
     this.newsList = {};
     this.pollingInterval = pollingInterval;
-    this.timeout = timeout;
+    this.timeout = timeoutPolling;
   }
 
   startPolling() {
@@ -28,7 +28,7 @@ export default class NewsPollingService {
       catchError((error) => {
         console.error('Ошибка при запросе:', error);
         return throwError(error); // Генерируем исключение при ошибке
-      })
+      }),
     );
   }
 }

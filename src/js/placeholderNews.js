@@ -7,23 +7,19 @@ export default class PlaceholderNews {
     this.render();
   }
 
-  removeElementsByClass(className) {
-    const elements = document.getElementsByClassName(className);
+  // удаление заглушки загрузки новостей
+  removePlaceholder() {
+    const elements = this.containerNews.getElementsByClassName('news-placeholder');
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0]);
     }
-  }
-
-  // удаление заглушки загрузки новостей
-  removePlaceholder() {
-    this.removeElementsByClass('news-placeholder');
   }
 
   render() {
     const placeholder = document.createElement('div');
     placeholder.classList.add('news-placeholder');
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 5; i += 1) {
       const listItem = document.createElement('div');
       listItem.classList.add('news-placeholder-item');
       listItem.innerHTML = `
